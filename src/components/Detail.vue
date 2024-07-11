@@ -10,7 +10,7 @@
         <h2>Comments:</h2>
         <ul class="comments-list">
           <li v-for="comment in comments" :key="comment.id" class="comment-item">
-            <h3>{{ comment.name }}</h3>
+            <h3> {{ comment.id }}, {{ comment.name }}</h3>
             <p>{{ comment.body }}</p>
             <p><strong>By:</strong> {{ comment.email }}</p>
           </li>

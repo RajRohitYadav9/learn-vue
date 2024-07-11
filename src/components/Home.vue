@@ -4,8 +4,14 @@
         <div v-else>
             <div class="container">
                 <h1 class="heading">Posts of all users</h1>
+                <div>
+                  <input
+                    type="text"
+                    v-model="searchQuery"
+                  />
+                </div>
             <ul class="post-list">
-                <li v-for="post in posts" :key="post.id" class="post-item">
+                <li v-for="post in filteredPosts" :key="post.id" class="post-item">
                 <h2 class="post-title"><router-link :to="`/post/${post.id}`">{{ post.title }}</router-link></h2>
                 <p class="post-body">{{ post.body }}</p>
                 <p class="post-author"><strong>By:</strong> {{ post.userName }}</p>
@@ -25,7 +31,18 @@
       return {
         posts: [],
         loading: true,
+        searchQuery: ''
       };
+    },
+    computed: {
+      filteredPosts(){
+        if (!this.searchQuery){
+          return this.posts
+        }
+        return this.posts.filter(post =>
+          (post.userName.toLowerCase().includes(this.searchQuery.toLowerCase()) || post.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
+        )
+      }
     },
     async created() {
       try {

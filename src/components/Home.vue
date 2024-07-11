@@ -3,7 +3,7 @@
         <div v-if="loading" class="loading">Loading...</div>
         <div v-else>
             <div class="container">
-                <h1 class="heading">All Posts</h1>
+                <h1 class="heading">Posts of all users</h1>
             <ul class="post-list">
                 <li v-for="post in posts" :key="post.id" class="post-item">
                 <h2 class="post-title"><router-link :to="`/post/${post.id}`">{{ post.title }}</router-link></h2>

@@ -10,13 +10,13 @@
         <h2>Comments:</h2>
         <div>
                   <input
-                    type="text" placeholder="Search comment by author or title"
+                    type="text" placeholder="Search by author or title"
                     v-model="searchComment"
                   />
         </div>
         <ul class="comments-list">
           <li v-for="comment in filteredComments" :key="comment.id" class="comment-item">
-            <h3> {{ comment.id }}, {{ comment.name }}</h3>
+            <h3> {{ comment.id }}. {{ comment.name }}</h3>
             <p>{{ comment.body }}</p>
             <p><strong>By:</strong> {{ comment.email }}</p>
           </li>

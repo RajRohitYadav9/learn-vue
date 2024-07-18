@@ -10,7 +10,7 @@
         <h2>Comments:</h2>
         <div>
                   <input
-                    type="text" placeholder="Search by author or title"
+                    type="text" placeholder="Search by author or name"
                     v-model="searchComment"
                   />
         </div>

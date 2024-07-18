@@ -8,8 +8,14 @@
           <p>{{ post.body }}</p>
         </div>
         <h2>Comments:</h2>
+        <div>
+                  <input
+                    type="text" placeholder="Search comment by author or title"
+                    v-model="searchComment"
+                  />
+        </div>
         <ul class="comments-list">
-          <li v-for="comment in comments" :key="comment.id" class="comment-item">
+          <li v-for="comment in filteredComments" :key="comment.id" class="comment-item">
             <h3> {{ comment.id }}, {{ comment.name }}</h3>
             <p>{{ comment.body }}</p>
             <p><strong>By:</strong> {{ comment.email }}</p>
@@ -42,8 +48,19 @@ export default {
       comments: [],
       user: {},
       loading: true,
+      searchComment: ''
     };
   },
+  computed: {
+      filteredComments(){
+        if (!this.searchComment){
+          return this.comments
+        }
+        return this.comments.filter(comment =>
+          (comment.email.toLowerCase().includes(this.searchComment.toLowerCase()) || comment.name.toLowerCase().includes(this.searchComment.toLowerCase()))
+        )
+      }
+    },
   async created() {
     try {
       const postResponse = await axios.get(`https://jsonplaceholder.typicode.com/posts/${this.id}`);

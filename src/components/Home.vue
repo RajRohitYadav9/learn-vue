@@ -6,7 +6,7 @@
                 <h1 class="heading">Posts of all users</h1>
                 <div>
                   <input
-                    type="text"
+                    type="text" placeholder="Search by author or title"
                     v-model="searchQuery"
                   />
                 </div>

@@ -13,7 +13,10 @@
                     type="text" placeholder="Search by author or name"
                     v-model="searchComment"
                   />
-        </div>
+        </div><br><br>
+        <button @click="toggleSort">
+            Sort by {{ sortBy === 'name' ? 'ID' : 'Name' }}
+        </button>
         <ul class="comments-list">
           <li v-for="comment in filteredComments" :key="comment.id" class="comment-item">
             <h3> {{ comment.id }}. {{ comment.name }}</h3>
@@ -48,19 +51,41 @@ export default {
       comments: [],
       user: {},
       loading: true,
-      searchComment: ''
+      searchComment: '',
+      sortBy: 'id'
     };
   },
   computed: {
-      filteredComments(){
-        if (!this.searchComment){
-          return this.comments
-        }
-        return this.comments.filter(comment =>
-          (comment.email.toLowerCase().includes(this.searchComment.toLowerCase()) || comment.name.toLowerCase().includes(this.searchComment.toLowerCase()))
-        )
+    filteredComments() {
+      let sortedComments = [...this.comments];
+      if (this.sortBy === 'name') {
+        sortedComments.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (this.sortBy === 'id') {
+        sortedComments.sort((a, b) => a.id - b.id);
       }
+      if (!this.searchComment) {
+        return sortedComments;
+      }
+      return sortedComments.filter(comment =>
+      (comment.email.toLowerCase().includes(this.searchComment.toLowerCase()) || comment.name.toLowerCase().includes(this.searchComment.toLowerCase()))
+      );
     },
+  },
+  // computed: {
+  //     filteredComments(){
+  //       if (!this.searchComment){
+  //         return this.comments
+  //       }
+  //       return this.comments.filter(comment =>
+  //         (comment.email.toLowerCase().includes(this.searchComment.toLowerCase()) || comment.name.toLowerCase().includes(this.searchComment.toLowerCase()))
+  //       )
+  //     }
+  //   },
+  methods: {
+      toggleSort() {
+        this.sortBy = this.sortBy === 'name' ? 'id' : 'name';
+    },
+  },
   async created() {
     try {
       const postResponse = await axios.get(`https://jsonplaceholder.typicode.com/posts/${this.id}`);

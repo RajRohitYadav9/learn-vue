@@ -9,7 +9,7 @@
             type="text"
             placeholder="Search by author or title"
             v-model="searchQuery"
-          />
+          /><br><br>
           <button @click="toggleSort">
             Sort by {{ sortBy === 'title' ? 'ID' : 'Title' }}
           </button>

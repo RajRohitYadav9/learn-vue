@@ -12,7 +12,7 @@
                 </div>
             <ul class="post-list">
                 <li v-for="post in filteredPosts" :key="post.id" class="post-item">
-                <h2 class="post-title"><router-link :to="`/post/${post.id}`">{{ post.title }}</router-link></h2>
+                <h2 class="post-title"><router-link :to="`/post/${post.id}`">{{post.id}}. {{ post.title }}</router-link></h2>
                 <p class="post-body">{{ post.body }}</p>
                 <p class="post-author"><strong>By:</strong> {{ post.userName }}</p>
                 </li>

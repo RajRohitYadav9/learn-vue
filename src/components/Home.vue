@@ -38,7 +38,7 @@ export default {
       posts: [],
       loading: true,
       searchQuery: '',
-      sortBy: 'title', // default sort by title
+      sortBy: 'id',
     };
   },
   computed: {
